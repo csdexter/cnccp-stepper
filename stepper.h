@@ -112,6 +112,26 @@ typedef union {
   uint8_t Data[3];
 } TSPIBuffer;
 
+typedef enum {
+  START,
+  RUN,
+  HOLD,
+  STOP
+} TMoveState;
+
+typedef enum {
+  ACCEL,
+  DECEL,
+  CONST
+} TAccelerationState;
+
+typedef struct {
+  TMoveState Status;
+  TAccelerationState AccOp;
+  uint32_t TodoSteps, DecelSteps;
+  uint16_t SpeedTimeConstant, TargetTimeConstant; /* What gets loaded into OCR */
+} TOngoingMove;
+
 /* Sets given bit in InterruptCauses bitmap and asserts INT# line if given bit
  * is set in InterruptFlags and global interrupts are enabled */
 void SetFlagAndAssertInterrupt(uint8_t flag);

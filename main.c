@@ -24,7 +24,7 @@ volatile TSPIBuffer SPIBuf;
 volatile uint16_t MaxAcceleration, MaxSpeed, StartSpeed;
 volatile TInterruptFlags InterruptFlags, InterruptCauses;
 TMoveBufferEntryEx MoveBuffer[2], MoveValues;
-volatile uint16_t SpeedTimeConstant, StepPulseWidth; /* What gets loaded into OCR */
+uint16_t StepPulseWidth, AccelTimeConstant;
 uint8_t BufferSize;
 
 
