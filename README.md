@@ -13,7 +13,7 @@ The current incarnation of the Stepper MCU is three Atmel ATtiny84s SPI
 daisy-chained and ran as a single SPI slave by the Main MCU.
 
 ##WARNING##
-*Unless and until explictily noted otherwise, this code is laboratory quality and
+*Unless and until explicitly noted otherwise, this code is laboratory quality and
 not intended for usage in connection with actual moving parts such as stepper
 motors. Should you choose to test or use this software in a live environment,
 you do so entirely at your own risk.*
