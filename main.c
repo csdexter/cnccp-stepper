@@ -12,6 +12,7 @@
 #include <stdbool.h>
 
 #include <avr/interrupt.h>
+#include <avr/io.h>
 
 #include "boilerplate.h"
 #include "protocol.h"
