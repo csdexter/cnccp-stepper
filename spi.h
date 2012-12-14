@@ -94,14 +94,18 @@ extern void(*spi_hook)(bool);
 
   #define SPI_INTERRUPT_NAME SPI_STC_vect
 #elif defined(__AVR_ATtiny84__) || defined(__AVR_ATtiny2313A__) /* USI in SPI mode */
+  /* avr-libc is lame enough to not have an orthogonal implementation of these constants */
   #if defined(__AVR_ATtiny84__)
-    /* avr-libc is lame enough to not have an orthogonal implementation of these constants */
     #define MOSI_DDR DDRA
     #define MISO_DDR DDRA
     #define SCK_DDR DDRA
     #define MOSI_BIT PORTA6
     #define MISO_BIT PORTA5
     #define SCK_BIT PORTA4
+  #elif defined(__AVR_ATtiny2313A__)
+    #define USIBR _SFR_IO8(0x00)
+    #define power_usi_enable() (PRR &= ~_BV(PRUSI))
+    #define power_usi_disable() (PRR |= _BV(PRUSI))
   #endif
 
   #define spi_power(bState) \
@@ -125,7 +129,11 @@ extern void(*spi_hook)(bool);
       USICR = (bInterrupt << USIOIE) | (bEnable << USIWM0) | \
           ((bMode << USICS0) | (!bMode << USICS1)) | (bPhase << USICS0);
 
-  #define SPI_INTERRUPT_NAME USI_OVF_vect
+  #if defined(__AVR_ATtiny84__)
+    #define SPI_INTERRUPT_NAME USI_OVF_vect
+  #elif defined(__AVR_ATtiny2313A__)
+    #define SPI_INTERRUPT_NAME USI_OVERFLOW_vect
+  #endif
 #endif
 
 #endif /* SPI_H_ */
