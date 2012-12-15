@@ -77,7 +77,7 @@ void init(void) {
   /* *_STEP on PA7, output */
   DDRA = _BV(PORTA7);
   /* MOSI, MISO and SCK configured by SPI */
-  spi_configure(SPI_INT_ENABLE, SPI_ON, NULL, SPI_MASTER, NULL, SPI_PHASE_LEADING, NULL);
+  spi_configure(SPI_INT_ENABLE, SPI_ON, NULL, SPI_SLAVE, NULL, SPI_PHASE_LEADING, NULL);
   spi_hook = SPI_hook;
   /* CS_STEP# on PA3, input and pin change interrupt */
   /*  NOP, DDRA already contains "0" for input mode */
