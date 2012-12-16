@@ -63,7 +63,7 @@ void SetFlagAndAssertInterrupt(uint8_t flag) {
 }
 
 void ClearFlagsAndReleaseInterrupt(void) {
-  InterruptCauses.value &= 0x01;
+  InterruptCauses.value = 0;
   DDRA &= ~_BV(PORTA2);
 }
 
